@@ -5,6 +5,7 @@ const backend_url = 'https://srt-u4or.onrender.com'//  'http://localhost:8754'
 
 
 const RedirectComponent = () => {
+    console.log("::::redirect one is about to render.....")
     const { short_url } = useParams(); 
     const [originalUrl, setOriginalUrl] = useState(null);
 
