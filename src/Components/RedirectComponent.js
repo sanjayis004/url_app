@@ -21,6 +21,7 @@ const RedirectComponent = () => {
             .then(function (response) {
                 const result = response.data
                 setOriginalUrl(result.data[0]['long_url'])
+                window.location.href = result.data[0]['long_url']
                 //Navigate()
             })
             .catch(function (error) {
@@ -30,9 +31,9 @@ const RedirectComponent = () => {
     }, []);
 
     
-    if (originalUrl) {
-        window.location.href = originalUrl
-    }
+    // if (originalUrl) {
+    //     window.location.href = originalUrl
+    // }
 };
 
 export default RedirectComponent;

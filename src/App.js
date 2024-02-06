@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-        <Route path ="/" Component={UrlsShortenerBox} />
+        <Route exact path ="/" Component={UrlsShortenerBox} />
           <Route path ="/:short_url" Component={RedirectComponent}/>
         </Routes>
       </Router>
