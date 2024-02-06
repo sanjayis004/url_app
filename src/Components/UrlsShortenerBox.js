@@ -12,7 +12,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Drawer from '@mui/material/Drawer';
 import InfiniteScrollList from './InfiniteScrollList';
-const backend_url = 'https://srt-u4or.onrender.com'//  'http://localhost:8754'
+const backend_url =   'https://srt-u4or.onrender.com'//   'http://localhost:8754'
 
 
 const UrlShortenerBox = () => {
@@ -25,6 +25,7 @@ const UrlShortenerBox = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [urlList,setUrlList ] = useState([])
   const [totalClick,setTotalClicks] = useState(0)
+  const [loading,setLoading] = useState(false)
 
   useEffect(()=>{
     fetchAnalytics()
@@ -57,6 +58,7 @@ const UrlShortenerBox = () => {
   };
 
   const callUrlShortener = () => {
+    setLoading(true)
     const data = JSON.stringify({
       "long_url": originalUrl
     });
@@ -76,6 +78,7 @@ const UrlShortenerBox = () => {
         setShorted(true)
         setSuccessMessage('URL successfully shortened!');
         setErrorMessage(''); 
+        setLoading(false)
       })
       .catch(function (error) {
         if (error.response && error.response.status === 429) {
@@ -123,6 +126,11 @@ const UrlShortenerBox = () => {
     }
   };
   
+  const Spinner = () => (
+    <div className="spinner-border text-primary" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  );
 
   return (
     <>
@@ -208,7 +216,7 @@ const UrlShortenerBox = () => {
       {shorted == false ? (errorMessage != '' ? 
       <Button style={{  top: '-100px' }} onClick={shortenUrl}>SHORTEN  URL</Button> : 
       <Button style={{ top: '-260px' }} onClick={shortenUrl}>SHORTEN  URL</Button>) : 
-      <Button onClick={shortenAnotherUrl}>SHORTEN ANOTHER URL</Button>}
+      <Button onClick={shortenAnotherUrl} >  { loading ? <Spinner /> : 'SHORTEN ANOTHER URL'} </Button>}
      
 
     </div>
